@@ -2,7 +2,7 @@ import useHabitStore, { Habit } from "../zustand/store/todoStore";
 
 const List = (props: Habit) => {
   let today = new Date().toISOString().split("T")[0];
-  let { removeHabit } = useHabitStore();
+  let { removeHabit, toggleHabit } = useHabitStore();
 
   return (
     <div
@@ -14,7 +14,10 @@ const List = (props: Habit) => {
         <p className="text-slate-500 text-start">{props.frequency}</p>
       </div>
       <div className="flex gap-3">
-        <button className="border rounded-xl px-5 py-2 border-green-400 text-green-400 font-bold">
+        <button
+          className="border rounded-xl px-5 py-2 border-green-400 text-green-400 font-bold"
+          onClick={() => toggleHabit(props.id, today)}
+        >
           {today ? "Completed" : "Mark Complete"}
         </button>
         <button

@@ -8,13 +8,14 @@ export interface Habit {
   createdAt: string;
 }
 
-interface HabitSate {
+interface HabitState {
   habits: Habit[];
   submitHabit: (name: string, frequency: "weekly" | "daily") => void;
   removeHabit: (id: string) => void;
+  toggleHabit: (id: string, date: string) => void;
 }
 
-const useHabitStore = create<HabitSate>()((set) => {
+const useHabitStore = create<HabitState>()((set) => {
   return {
     habits: [
       {
@@ -43,6 +44,19 @@ const useHabitStore = create<HabitSate>()((set) => {
     removeHabit: (id) =>
       set((state) => ({
         habits: state.habits.filter((e) => e.id != id),
+      })),
+    toggleHabit: (id, date) =>
+      set((state) => ({
+        habits: state.habits.map((habit) =>
+          habit.id == id
+            ? {
+                ...habit,
+                completedAt: habit.completedAt.includes(date)
+                  ? habit.completedAt.filter((d) => d !== date)
+                  : [...habit.completedAt, date],
+              }
+            : habit
+        ),
       })),
   };
 });
