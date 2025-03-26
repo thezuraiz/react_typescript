@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 import useHabitStore, { Habit } from "../zustand/store/todoStore";
 
 const List = (props: Habit) => {
