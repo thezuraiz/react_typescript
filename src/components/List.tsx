@@ -1,6 +1,9 @@
-import { Habit } from "../zustand/store/todoStore";
+import useHabitStore, { Habit } from "../zustand/store/todoStore";
 
 const List = (props: Habit) => {
+  let today = new Date().toISOString().split("T")[0];
+  let { removeHabit } = useHabitStore();
+
   return (
     <div
       className="flex justify-between items-center container text-center rounded-xl border border-slate-300 p-3 my-3"
@@ -12,9 +15,12 @@ const List = (props: Habit) => {
       </div>
       <div className="flex gap-3">
         <button className="border rounded-xl px-5 py-2 border-green-400 text-green-400 font-bold">
-          {props.createdAt ? "Mark As Completed" : "Complete"}
+          {today ? "Completed" : "Mark Complete"}
         </button>
-        <button className="border rounded-xl px-5 py-2 border-red-400 text-red-400 font-bold">
+        <button
+          className="border rounded-xl px-5 py-2 border-red-400 text-red-400 font-bold"
+          onClick={() => removeHabit(props.id)}
+        >
           Delete
         </button>
       </div>

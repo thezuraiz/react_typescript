@@ -10,7 +10,7 @@ const RenderList = () => {
     <div className="container mx-auto">
       <h3 className="text-3xl font-mono my-3 font-medium">Habit</h3>
       {store.habits.map((e: Habit) => (
-        <List {...e} />
+        <List {...e} key={e.id} />
       ))}
     </div>
   );
