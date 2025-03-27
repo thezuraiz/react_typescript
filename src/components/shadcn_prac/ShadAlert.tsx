@@ -1,4 +1,4 @@
-import { AlertCircle, Terminal, PanelLeftClose } from "lucide-react";
+import { AlertCircle, Terminal, LucideMoveDiagonal } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useState } from "react";
 import { Button } from "../ui/button";
@@ -8,8 +8,12 @@ export function ShadAlert() {
 
   return (
     <div className="space-y-4">
-      <Button onClick={() => setshow((e) => !e)}>
-        {show ? "Hide" : "Open"} <PanelLeftClose />
+      <Button
+        variant={"outline"}
+        className="w-full"
+        onClick={() => setshow((e) => !e)}
+      >
+        {show ? "Hide" : "Open"} Simple Alert <LucideMoveDiagonal />
       </Button>
       {show && (
         <>
