@@ -8,7 +8,9 @@ import {
 const ShadAccordion = () => {
   return (
     <>
-      <h3 className="font-mono text-3xl italic text-center">Accordion</h3>
+      <h3 className="py-3 italic text-xl font-medium text-center underline">
+        Accordion
+      </h3>
       <Accordion type="single" collapsible>
         <AccordionItem value="item-1">
           <AccordionTrigger>Is it accessible?</AccordionTrigger>

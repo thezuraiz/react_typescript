@@ -4,6 +4,7 @@ import "./index.css";
 import ShadButtons from "./components/shadcn_prac/ShadButtons";
 import ShadAccordion from "./components/shadcn_prac/ShadAccordion";
 import { ShadAlert } from "./components/shadcn_prac/ShadAlert";
+import ShadAlertDialog from "./components/shadcn_prac/ShadAlertDialog";
 
 // import RenderProb from "./components/RenderProb";
 
@@ -18,6 +19,7 @@ createRoot(document.getElementById("root")!).render(
         <ShadButtons />
         <ShadAccordion />
         <ShadAlert />
+        <ShadAlertDialog />
       </div>
     </div>
   </StrictMode>

@@ -4,7 +4,7 @@ import { Button } from "../ui/button";
 const ShadButtons = () => {
   return (
     <>
-      <h3 className="py-3 font-mono italic text-2xl text-center ">
+      <h3 className="py-3 italic text-xl font-medium text-center">
         Shad CN Buttons
       </h3>
       <div className="flex  items-center justify-between gap-2 my-5 flex-wrap p-5">
