@@ -6,7 +6,7 @@ const RenderProb = () => {
   const email = useRef<HTMLInputElement | null>(null);
   const password = useRef<HTMLInputElement | null>(null);
   const name = useRef<HTMLInputElement | null>(null);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -14,7 +14,7 @@ const RenderProb = () => {
   };
   return (
     <div>
-      <h2>Sign Up</h2>
+      <h2 className="font-mono text-xl font-medium italic">Sign Up</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Name</label>
@@ -57,6 +57,7 @@ const RenderProb = () => {
           <h3>Submitted Data:</h3>
           <p>
             <strong>Name:</strong> {name.current?.value}
+            {name.current?.type}
           </p>
           <p>
             <strong>Email:</strong> {email.current?.value}
