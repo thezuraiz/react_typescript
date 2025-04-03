@@ -3,18 +3,62 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { FormEvent, useRef } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { ReactFormState } from "react-dom/client";
+import { log } from "console";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  let nav = useNavigate();
+
+  const mutation = useMutation({
+    mutationFn: async (data: { email: string; password: string }) => {
+      let userEmail = window.localStorage.getItem("email");
+      let userPassword = window.localStorage.getItem("password");
+
+      if (userEmail == data.email && userPassword == data.password) {
+        console.log(userEmail);
+        console.log(userPassword);
+        console.log(data.email);
+        console.log(data.password);
+        return;
+      }
+      alert("Wrong Email and Password");
+      throw new Error("Wrong Email and Password");
+    },
+    onSuccess: () => {
+      nav("/dashboard/home");
+      alert("Success Login");
+    },
+  });
+
+  let handleLogin = async () => {
+    let email = emailRef.current?.value;
+    let password = passwordRef.current?.value;
+    if (!email || !password) {
+      alert("Email and Password Required");
+      return;
+    }
+    mutation.mutate({ email: email, password: password });
+  };
   return (
     <section className="p-80 min-w-5xl">
       <div className={cn("flex flex-col gap-6", className)} {...props}>
         <Card className="overflow-hidden">
           <CardContent className="grid p-0 md:grid-cols-2">
-            <form className="p-6 md:p-8">
+            <form
+              className="p-6 md:p-8"
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleLogin();
+              }}
+            >
               <div className="flex flex-col gap-6">
                 <div className="flex flex-col items-center text-center">
                   <h1 className="text-2xl font-bold">Welcome back</h1>
@@ -27,6 +71,7 @@ export function LoginForm({
                   <Input
                     id="email"
                     type="email"
+                    ref={emailRef}
                     placeholder="m@example.com"
                     required
                   />
@@ -41,7 +86,12 @@ export function LoginForm({
                       Forgot your password?
                     </a>
                   </div>
-                  <Input id="password" type="password" required />
+                  <Input
+                    id="password"
+                    type="password"
+                    ref={passwordRef}
+                    required
+                  />
                 </div>
                 <Button type="submit" className="w-full">
                   Login

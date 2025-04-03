@@ -1,18 +1,47 @@
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { useRef } from "react";
+import { useMutation } from "@tanstack/react-query";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
+  const mutation = useMutation({
+    mutationFn: async (data: { email: string; password: string }) => {
+      let userEmail = window.localStorage.getItem("email");
+      let userPassword = window.localStorage.getItem("password");
+      if (userEmail == data.email && userPassword == data.password) {
+        await setTimeout(() => {}, 500);
+        alert("You are Loggined");
+      }
+      return true;
+    },
+    onSuccess: () => {
+      alert("Success Login");
+    },
+  });
+
+  let handleLogin = async () => {
+    let email = emailRef.current?.value;
+    let password = emailRef.current?.value;
+    if (!email || !password) {
+      alert("Email and Password Required");
+      return;
+    }
+    mutation.mutate({ email: email, password: password });
+  };
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card className="overflow-hidden">
         <CardContent className="grid p-0 md:grid-cols-2">
-          <form className="p-6 md:p-8">
+          <form className="p-6 md:p-8" onSubmit={handleLogin}>
             <div className="flex flex-col gap-6">
               <div className="flex flex-col items-center text-center">
                 <h1 className="text-2xl font-bold">Welcome back</h1>
@@ -23,6 +52,7 @@ export function LoginForm({
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
+                  ref={emailRef}
                   id="email"
                   type="email"
                   placeholder="m@example.com"
@@ -39,7 +69,12 @@ export function LoginForm({
                     Forgot your password?
                   </a>
                 </div>
-                <Input id="password" type="password" required />
+                <Input
+                  id="password"
+                  type="password"
+                  ref={passwordRef}
+                  required
+                />
               </div>
               <Button type="submit" className="w-full">
                 Login
@@ -100,5 +135,5 @@ export function LoginForm({
         and <a href="#">Privacy Policy</a>.
       </div>
     </div>
-  )
+  );
 }

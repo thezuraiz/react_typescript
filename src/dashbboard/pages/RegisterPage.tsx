@@ -9,12 +9,39 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useRef } from "react";
+import { useMutation } from "@tanstack/react-query";
 
 export function RegisterPage({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  let nav = useNavigate();
+
+  const mutation = useMutation({
+    mutationFn: async (data: { email: string; password: string }) => {
+      window.localStorage.setItem("email", data.email);
+      window.localStorage.setItem("password", data.password);
+      return true;
+    },
+    onSuccess: () => {
+      alert("Success Login");
+      nav("/login");
+    },
+  });
+
+  let handleLogin = async () => {
+    let email = emailRef.current?.value;
+    let password = emailRef.current?.value;
+    if (!email || !password) {
+      alert("Email and Password Required");
+      return;
+    }
+    mutation.mutate({ email: email, password: password });
+  };
   return (
     <section className="flex justify-center items-center h-screen">
       <div className={cn("flex flex-col gap-6 ", className)} {...props}>
@@ -26,13 +53,14 @@ export function RegisterPage({
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form>
+            <form onSubmit={handleLogin}>
               <div className="flex flex-col gap-6">
                 <div className="grid gap-2">
                   <Label htmlFor="email">Email</Label>
                   <Input
                     id="email"
                     type="email"
+                    ref={emailRef}
                     placeholder="m@example.com"
                     required
                   />
@@ -47,10 +75,15 @@ export function RegisterPage({
                       Forgot your password?
                     </a>
                   </div>
-                  <Input id="password" type="password" required />
+                  <Input
+                    id="password"
+                    type="password"
+                    ref={passwordRef}
+                    required
+                  />
                 </div>
                 <Button type="submit" className="w-full">
-                  Login
+                  Register
                 </Button>
               </div>
               <div className="mt-4 text-center text-sm">
