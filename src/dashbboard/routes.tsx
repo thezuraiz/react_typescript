@@ -4,6 +4,7 @@ import { RegisterPage } from "./pages/RegisterPage";
 import Error404 from "./pages/Error404";
 import DashboardHome from "./pages/dashboardPages/home";
 import DashboardLayout from "./layout/dashboardLayout";
+import BooksPage from "./pages/dashboardPages/books";
 export const router = createBrowserRouter([
   {
     path: "/dashboard",
@@ -15,7 +16,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "books",
-        element: <></>,
+        element: <BooksPage />,
       },
     ],
   },
