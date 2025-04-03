@@ -4,10 +4,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Link, useNavigate } from "react-router-dom";
-import { FormEvent, useRef } from "react";
+import { useRef } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { ReactFormState } from "react-dom/client";
-import { log } from "console";
 
 export function LoginForm({
   className,
