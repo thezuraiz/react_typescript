@@ -61,7 +61,10 @@ export function LoginForm({
                 <div className="flex flex-col items-center text-center">
                   <h1 className="text-2xl font-bold">Welcome back</h1>
                   <p className="text-balance text-muted-foreground">
-                    Login to your Elib Inc account
+                    Login to your Elib Inc account <br />
+                    <span className="text-red-500 font-medium">
+                      {mutation.error && mutation.error?.message}
+                    </span>
                   </p>
                 </div>
                 <div className="grid gap-2">
@@ -91,7 +94,11 @@ export function LoginForm({
                     required
                   />
                 </div>
-                <Button type="submit" className="w-full">
+                <Button
+                  type="submit"
+                  className="w-full"
+                  disabled={mutation.isPending}
+                >
                   Login
                 </Button>
 
