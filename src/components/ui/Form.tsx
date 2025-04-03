@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import useHabitStore from "../zustand/store/todoStore";
-import { Button } from "./ui/button";
+import useHabitStore from "../../zustand/store/todoStore";
+import { Button } from "./button";
 import { Loader2, MailOpen } from "lucide-react";
 import { ChevronRight } from "lucide-react";
 

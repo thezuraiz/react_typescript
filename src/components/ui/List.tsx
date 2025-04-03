@@ -1,5 +1,5 @@
 /* eslint-disable prefer-const */
-import useHabitStore, { Habit } from "../zustand/store/todoStore";
+import useHabitStore, { Habit } from "../../zustand/store/todoStore";
 
 const List = (props: Habit) => {
   let today = new Date().toISOString().split("T")[0];

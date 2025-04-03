@@ -1,5 +1,5 @@
-import useHabitStore from "../zustand/store/todoStore";
-import { Habit } from "../zustand/store/todoStore";
+import useHabitStore from "../../zustand/store/todoStore";
+import { Habit } from "../../zustand/store/todoStore";
 import List from "./List";
 
 const RenderList = () => {

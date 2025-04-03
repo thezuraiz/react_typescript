@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from "react";
 import {
   ArrowUpCircleIcon,
   BarChartIcon,
@@ -15,12 +15,12 @@ import {
   SearchIcon,
   SettingsIcon,
   UsersIcon,
-} from "lucide-react"
+} from "lucide-react";
 
-import { NavDocuments } from "@/components/nav-documents"
-import { NavMain } from "@/components/nav-main"
-import { NavSecondary } from "@/components/nav-secondary"
-import { NavUser } from "@/components/nav-user"
+import { NavDocuments } from "@/components/ui/nav-documents";
+import { NavMain } from "@/components/ui/nav-main";
+import { NavSecondary } from "@/components/ui/nav-secondary";
+import { NavUser } from "@/components/ui/nav-user";
 import {
   Sidebar,
   SidebarContent,
@@ -29,7 +29,8 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
+import { Link } from "react-router-dom";
 
 const data = {
   user: {
@@ -146,7 +147,7 @@ const data = {
       icon: FileIcon,
     },
   ],
-}
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -158,10 +159,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               asChild
               className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
-              <a href="#">
+              <Link to="/">
                 <ArrowUpCircleIcon className="h-5 w-5" />
-                <span className="text-base font-semibold">Acme Inc.</span>
-              </a>
+                <span className="text-base font-semibold">Elib Dashboard</span>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
@@ -175,5 +176,5 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavUser user={data.user} />
       </SidebarFooter>
     </Sidebar>
-  )
+  );
 }

@@ -1,5 +1,5 @@
-import CustomForm from "./components/Form";
-import RenderList from "./components/RenderList";
+import CustomForm from "./components/ui/Form";
+import RenderList from "./components/ui/RenderList";
 
 function App() {
   return (
