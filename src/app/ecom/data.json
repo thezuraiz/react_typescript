@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "name": "Books",
+    "type": "Books",
+    "status": "available",
+    "price": "2600"
+  },
+  {
+    "id": "2",
+    "name": "Pens",
+    "type": "Pen",
+    "status": "available",
+    "price": "2200"
+  },
+  {
+    "id": "3",
+    "name": "Shoes",
+    "type": "Shoe",
+    "status": "available",
+    "price": "4600"
+  }
+]
