@@ -10,6 +10,7 @@ import DemoPage from "./pages/table/page";
 import EcomLayout from "@/app/ecom-task/home-page";
 import ProductPage from "@/app/ecom-task/product-page";
 import ProductsPage from "@/app/ecom-task/Products-page";
+import GarjPage from "./pages/garaj-task/garj-page";
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
         element: <BooksPage />,
       },
     ],
+  },
+  {
+    path: "/garj",
+    element: <GarjPage />,
   },
   {
     path: "/login",
