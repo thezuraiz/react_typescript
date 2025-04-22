@@ -1,13 +1,27 @@
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+
+const signUpSchema = z
+  .object({
+    username: z.string(),
+    email: z.string().email(),
+    password: z.string().min(8),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    path: ["confirmPassword"],
+    message: "Password must match",
+  });
+
 const FormHandling = () => {
-  const form = useForm<FormValues>();
+  const form = useForm<FormValues>({ resolver: zodResolver(signUpSchema) });
   let {
     register,
     control,
     handleSubmit,
     formState: { errors, isSubmitting },
-    getValues,
     // reset, // For reset form
   } = form;
   //   const { name, ref, onChange, onBlur } = register("username"); // Old Way
@@ -31,19 +45,11 @@ const FormHandling = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <label htmlFor="username">Username</label>
-        <input
-          type="text"
-          id="username"
-          {...register("username", { required: "Username Required" })}
-        />
+        <input type="text" id="username" {...register("username")} />
         {errors.username && <p>{errors.username.message}</p>}
 
         <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          {...register("email", { required: "Email Required" })}
-        />
+        <input type="email" id="email" {...register("email")} />
         {errors.email && <p>{errors.email.message}</p>}
 
         <label htmlFor="password">Password</label>
@@ -51,10 +57,7 @@ const FormHandling = () => {
           type="text"
           id="password"
           className="text-black"
-          {...register("password", {
-            required: "password Requiried",
-            minLength: { value: 9, message: "min length should be 9" },
-          })}
+          {...register("password")}
         />
         {errors.password && <p>{errors.password.message}</p>}
 
@@ -63,10 +66,7 @@ const FormHandling = () => {
           type="text"
           id="confirmPassword"
           className="text-black"
-          {...register("confirmPassword", {
-            validate: (value) =>
-              value == getValues("password") || "Password must match",
-          })}
+          {...register("confirmPassword")}
         />
         {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
 
