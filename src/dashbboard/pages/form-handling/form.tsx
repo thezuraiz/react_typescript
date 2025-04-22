@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 const FormHandling = () => {
   const form = useForm();
   let { register } = form;
-  const { name, ref, onChange, onBlur } = register(""); // Old Way
+  const { name, ref, onChange, onBlur } = register("username"); // Old Way
   return (
     <div className="bg-black text-white h-screen">
       <form className="flex flex-col w-1/3 p-5 ">
