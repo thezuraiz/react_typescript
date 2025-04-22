@@ -11,6 +11,7 @@ import EcomLayout from "@/app/ecom-task/home-page";
 import ProductPage from "@/app/ecom-task/product-page";
 import ProductsPage from "@/app/ecom-task/Products-page";
 import GarjPage from "./pages/garaj-task/garj-page";
+import FormHandling from "./pages/form-handling/form";
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ export const router = createBrowserRouter([
         element: <BooksPage />,
       },
     ],
+  },
+  {
+    path: "/formhandling",
+    element: <FormHandling />,
   },
   {
     path: "/garj",

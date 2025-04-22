@@ -74,24 +74,24 @@ const GarjPage = () => {
     {
       browser: "Active",
       visitors: devices?.active ?? 275,
-      fill: "hsl(var(--chart-4))",
+      fill: "#39E75F",
     },
     {
       browser: "In Active",
       visitors: devices?.offline ?? 200,
-      fill: "#3B86F7",
+      fill: "#808080",
     },
     {
       browser: "Available",
       visitors: devices?.available ?? 187,
-      fill: "hsl(var(--chart-2))",
+      fill: "#3B86F7",
     },
   ];
 
   const chart2Data = [
-    { browser: "Available", visitors: 125, fill: "#FF0000" },
-    { browser: "Not Available", visitors: 120, fill: "hsl(var(--chart-4))" },
-    { browser: "Maintainance", visitors: 187, fill: "hsl(var(--chart-2))" },
+    { browser: "Available", visitors: 125, fill: "#3B86F7" },
+    { browser: "Not Available", visitors: 120, fill: "#808080" },
+    { browser: "Maintainance", visitors: 187, fill: "#FF0000" },
   ];
 
   const yearData = [
