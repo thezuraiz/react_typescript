@@ -16,7 +16,7 @@ const signUpSchema = z
   });
 
 const FormHandling = () => {
-  const form = useForm<FormValues>({ resolver: zodResolver(signUpSchema) });
+  const form = useForm({ resolver: zodResolver(signUpSchema) });
   let {
     register,
     control,
@@ -26,14 +26,15 @@ const FormHandling = () => {
   } = form;
   //   const { name, ref, onChange, onBlur } = register("username"); // Old Way
 
-  type FormValues = {
-    username: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-  };
+  // type FormValues = {
+  //   username: string;
+  //   email: string;
+  //   password: string;
+  //   confirmPassword: string;
+  // }; // Bad Approach
+  type TSignUpSchema = z.infer<typeof signUpSchema>;
 
-  const onSubmit = async (data: FormValues) => {
+  const onSubmit = async (data: TSignUpSchema) => {
     await new Promise((resolver) => setTimeout(resolver, 2000));
 
     console.log(`Form Submitted: `, data);
